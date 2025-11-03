@@ -1,0 +1,196 @@
+<!-- 文档类型声明：告诉浏览器这是HTML5文档 -->
+<!DOCTYPE html>
+<!-- html标签：根元素，所有内容都包裹在其中；lang="zh-CN"表示页面主要语言为中文 -->
+<html lang="zh-CN">
+<!-- head标签：存放页面元数据（不直接显示在页面上的信息） -->
+<head>
+    <!-- meta标签：设置字符编码为UTF-8，支持中文等多语言显示 -->
+    <meta charset="UTF-8">
+    <!-- meta标签：设置视口，确保移动端页面正常缩放（width=device-width表示宽度等于设备宽度，initial-scale=1.0表示初始缩放比例为1） -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- title标签：设置页面标题，显示在浏览器标签栏 -->
+    <title>我是猪我是猪我是猪</title>
+    <!-- style标签：内部CSS样式，用于美化页面元素 -->
+    <style>
+        /* 为body标签设置样式：页面主体区域 */
+        body {
+            font-family: "微软雅黑", sans-serif; /* 字体：优先微软雅黑，无则用系统默认无衬线字体 */
+            text-align: center; /* 文本居中对齐 */
+            background-color: #ffc0cb; /* 背景色：粉色 */
+            padding: 50px; /* 内边距：上下左右各50px，避免内容贴边 */
+            margin: 0; /* 清除默认外边距，避免滚动条 */
+        }
+        /* 为h1标签设置样式：标题 */
+        h1 {
+            color: #2c3e50; /* 文字颜色：深灰色 */
+        }
+        /* 为类名为btn的元素设置样式：按钮 */
+        .btn {
+            padding: 10px 20px; /* 内边距：上下10px，左右20px */
+            background-color: #3498db; /* 背景色：蓝色 */
+            color: white; /* 文字颜色：白色 */
+            border: none; /* 去掉边框 */
+            border-radius: 5px; /* 圆角：5px */
+            cursor: pointer; /* 鼠标悬停时显示手型指针 */
+            margin-top: 20px; /* 上外边距：20px，与上方元素拉开距离 */
+        }
+        /* 为btn类元素设置鼠标悬停样式 */
+        .btn:hover {
+            background-color: #2980b9; /* 悬停时背景色：深蓝色（比原来深一点） */
+        }
+        /* 弹窗容器样式（默认隐藏） */
+        .modal {
+            display: none; /* 默认不显示 */
+            position: fixed; /* 固定定位：相对于浏览器窗口 */
+            top: 0; /* 距离顶部0 */
+            left: 0; /* 距离左侧0 */
+            width: 100%; /* 宽度占满屏幕 */
+            height: 100%; /* 高度占满屏幕 */
+            background: rgba(0,0,0,0.5); /* 背景：半透明黑色（遮罩层） */
+            justify-content: center; /* 水平居中对齐内部内容（配合display:flex使用） */
+            align-items: center; /* 垂直居中对齐内部内容（配合display:flex使用） */
+            z-index: 100; /* 确保弹窗在最上层 */
+        }
+        /* 弹窗内容容器样式 */
+        .modal-content {
+            background: white; /* 背景色：白色 */
+            padding: 20px; /* 内边距：20px */
+            border-radius: 8px; /* 圆角：8px */
+            position: relative; /* 相对定位，确保在特效上层 */
+            z-index: 102; /* 高于特效层级 */
+        }
+        /* 弹窗内图片样式 */
+        .modal img {
+            width: 600px; /* 图片宽度：600px */
+            height: auto; /* 高度自动：保持图片原有比例，避免变形 */
+        }
+        /* 关闭按钮样式 */
+        .close {
+            position: absolute; /* 绝对定位：相对于最近的已定位祖先（这里是.modal） */
+            top: 20px; /* 距离顶部20px */
+            right: 30px; /* 距离右侧30px */
+            font-size: 30px; /* 字体大小：30px */
+            color: white; /* 文字颜色：白色 */
+            cursor: pointer; /* 鼠标悬停时显示手型指针 */
+            z-index: 102; /* 确保关闭按钮在特效上层 */
+        }
+
+        /* 星星特效样式 */
+        .star {
+            position: absolute; /* 绝对定位，跟随弹窗 */
+            color: #ffffff; /* 白色星星 */
+            pointer-events: none; /* 鼠标穿透，不影响点击 */
+            animation: fall linear infinite; /* 应用下落动画 */
+            z-index: 101; /* 位于背景和图片之间 */
+        }
+
+        /* 粉色心形特效样式 */
+        .heart {
+            position: absolute; /* 绝对定位，跟随弹窗 */
+            color: #ff69b4; /* 粉色心形 */
+            pointer-events: none; /* 鼠标穿透 */
+            animation: fall linear infinite; /* 应用下落动画 */
+            z-index: 101; /* 位于背景和图片之间 */
+        }
+
+        /* 下落动画关键帧 */
+        @keyframes fall {
+            0% {
+                transform: translateY(-10px) rotate(0deg); /* 顶部开始，无旋转 */
+                opacity: 1; /* 完全可见 */
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg); /* 落到屏幕底部，旋转一周 */
+                opacity: 0; /* 逐渐消失 */
+            }
+        }
+    </style>
+</head>
+<!-- body标签：存放页面可见内容 -->
+<body>
+    <!-- 一级标题：显示文本 -->
+    <h1>我是猪</h1>
+    <!-- 一级标题：显示文本 -->
+    <h1>你想看看我吗？</h1>
+    <!-- 按钮：点击时触发openImageModal()函数；class="btn"应用上面定义的btn样式 -->
+    <button class="btn" onclick="openImageModal()">点击我</button>
+
+    <!-- 弹窗容器：id="imageModal"用于JS获取该元素；class="modal"应用上面定义的modal样式 -->
+    <div class="modal" id="imageModal">
+        <!-- 关闭按钮：点击时触发closeImageModal()函数；&times;是×符号的HTML实体 -->
+        <span class="close" onclick="closeImageModal()">&times;</span>
+        <!-- 弹窗内容容器：包裹图片 -->
+        <div class="modal-content">
+            <!-- 图片元素：id="modalImg"用于JS设置图片路径；alt属性在图片加载失败时显示 -->
+            <img id="modalImg" alt="弹窗展示图片">
+        </div>
+    </div>
+
+    <!-- script标签：存放JavaScript代码，实现交互功能 -->
+    <script>
+        // 获取弹窗容器元素（通过id="imageModal"），存到变量modal中
+        const modal = document.getElementById('imageModal');
+        // 获取图片元素（通过id="modalImg"），存到变量modalImg中
+        const modalImg = document.getElementById('modalImg');
+        let effectInterval; // 用于存储特效定时器
+
+        // 定义打开弹窗的函数
+        function openImageModal() {
+            // 设置图片路径：这里是本地图片，需与HTML文件在同一文件夹
+            modalImg.src = "pig251103.jpg"; 
+            // 显示弹窗：将display属性改为flex（覆盖默认的none）
+            modal.style.display = "flex";
+            
+            // 启动特效：每100毫秒创建一个星星或心形
+            effectInterval = setInterval(() => {
+                createFallingElement();
+            }, 100);
+        }
+
+        // 定义关闭弹窗的函数
+        function closeImageModal() {
+            // 隐藏弹窗：将display属性改回none
+            modal.style.display = "none";
+            // 停止特效定时器
+            clearInterval(effectInterval);
+            // 清除所有已创建的特效元素
+            document.querySelectorAll('.star, .heart').forEach(el => el.remove());
+        }
+
+        // 创建下落的星星或心形元素
+        function createFallingElement() {
+            // 50%概率创建星星或心形
+            const isStar = Math.random() > 0.5;
+            const element = document.createElement('div');
+            
+            if (isStar) {
+                element.className = 'star';
+                element.textContent = '★'; // 星星符号
+                element.style.fontSize = `${Math.random() * 35 + 20}px`; // 随机大小（20-55px）
+            } else {
+                element.className = 'heart';
+                element.textContent = '❤'; // 心形符号
+                element.style.fontSize = `${Math.random() * 40 + 25}px`; // 随机大小（25-65px）
+            }
+
+            // 随机水平位置（0-100%屏幕宽度）
+            element.style.left = `${Math.random() * 100}vw`;
+            // 随机下落速度（2-8秒）
+            element.style.animationDuration = `${Math.random() * 6 + 2}s`;
+            // 随机透明度（0.3-1）
+            element.style.opacity = Math.random() * 0.7 + 0.3;
+
+            // 添加到弹窗容器中
+            modal.appendChild(element);
+
+            // 动画结束后自动移除元素（避免内存占用）
+            setTimeout(() => {
+                element.remove();
+            }, 8000);
+        }
+
+        // 在浏览器控制台输出信息：用于调试，提示页面加载完成
+        console.log("页面加载完成！");
+    </script>
+</body>
+</html>
